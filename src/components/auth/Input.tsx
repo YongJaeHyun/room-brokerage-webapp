@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 type Props = {
-    type?: string;
-    name: string;
-    labelName: string;
-    placeholder: string;
-}
+  type?: string;
+  name: string;
+  labelName: string;
+  placeholder: string;
+};
 
-const Input = ({type, name, labelName, placeholder}: Props) => {
+const Input = ({ type, name, labelName, placeholder }: Props) => {
   const [value, setValue] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
   return (

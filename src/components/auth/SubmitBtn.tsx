@@ -1,8 +1,8 @@
 type Props = {
-    value: string;
-}
+  value: string;
+};
 
-const SubmitBtn = ({value}: Props) => {
+const SubmitBtn = ({ value }: Props) => {
   return (
     <button
       type="submit"

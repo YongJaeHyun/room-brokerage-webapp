@@ -7,13 +7,7 @@ const Header = () => {
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link href="/" className="flex items-center">
-            <Image
-              width={35}
-              height={45}
-              src="/logo.png"
-              className="mr-3 h-9"
-              alt="Logo"
-            />
+            <Image width={35} height={45} src="/images/logo.png" className="mr-3 h-9" alt="Logo" />
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               원룸 중개 앱
             </span>
@@ -23,7 +17,7 @@ const Header = () => {
               href="/auth/login"
               className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
             >
-              Log in
+              로그인
             </Link>
             <button
               data-collapse-toggle="mobile-menu-2"
@@ -66,7 +60,7 @@ const Header = () => {
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
                 <Link
-                  href="/"
+                  href="/board"
                   className="block py-2 pr-4 pl-3 text-gray-700 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                   aria-current="page"
                 >
@@ -75,7 +69,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/"
+                  href="/board/write"
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   원룸 내놓기
@@ -83,18 +77,18 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/wishlist/lessee"
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
-                  찜한 매물
+                  찜한 원룸
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/wishlist/landlord"
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
-                  계약한 매물
+                  내놓은 원룸
                 </Link>
               </li>
             </ul>

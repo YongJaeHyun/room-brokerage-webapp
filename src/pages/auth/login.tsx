@@ -1,5 +1,5 @@
 import Seo from "@/components/Seo";
-import Title from "@/components/Title";
+import Title from "@/components/auth/Title";
 import CheckBox from "@/components/auth/CheckBox";
 import Input from "@/components/auth/Input";
 import Link from "next/link";

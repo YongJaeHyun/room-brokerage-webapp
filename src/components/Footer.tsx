@@ -26,7 +26,13 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <Link className="text-xs p-2" href="https://www.flaticon.com/kr" title="집 아이콘">로고 제작자: Freepik - Flaticon</Link>
+        <Link
+          className="text-xs p-2 text-gray-500 dark:text-gray-400"
+          href="https://www.flaticon.com/kr"
+          title="집 아이콘"
+        >
+          로고 제작자: Freepik - Flaticon
+        </Link>
         <p className="text-sm text-gray-500 sm:text-center dark:text-gray-400 pb-2">
           Copyright © YongjaeHyun 2023 All Rights Reserved.
         </p>

@@ -7,7 +7,13 @@ const Header = () => {
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link href="/" className="flex items-center">
-            <Image width={35} height={45} src="/images/logo.png" className="mr-3 h-9" alt="Logo" />
+            <Image
+              width={35}
+              height={45}
+              src="/images/logo.png"
+              className="mr-3 h-9"
+              alt="Logo"
+            />
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               원룸 중개 앱
             </span>
@@ -69,14 +75,6 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/board/write"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  원룸 내놓기
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/wishlist/lessee"
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
@@ -85,7 +83,16 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/wishlist/landlord"
+                  href="/board/write"
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  원룸 내놓기
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  href="/board/landlord"
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   내놓은 원룸

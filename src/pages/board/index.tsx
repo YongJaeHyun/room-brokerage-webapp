@@ -10,7 +10,7 @@ export default function Board() {
         <SearchBox />
         <div className="grid gap-8 mb-6 lg:mb-16 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, idx) => (
-            <Item key={idx}/>
+            <Item key={idx} id={String(idx)} />
           ))}
         </div>
       </div>

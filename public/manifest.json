@@ -1,0 +1,49 @@
+{
+  "theme_color": "#3b82f6",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": ".",
+  "start_url": "./index.html",
+  "short_name": "\uc6d0\ub8f8 \uc911\uac1c \uc571",
+  "name": "\uc6d0\ub8f8 \uc911\uac1c \uc571",
+  "description": "\uc6d0\ub8f8\uc744 \uc911\uac1c \ud560 \uc218 \uc788\ub294 \uc571\uc785\ub2c8\ub2e4.",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "images/android-icon-36x36.png",
+      "sizes": "36x36",
+      "type": "image/png",
+      "density": "0.75"
+    },
+    {
+      "src": "images/android-icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "density": "1.0"
+    },
+    {
+      "src": "images/android-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "density": "1.5"
+    },
+    {
+      "src": "images/android-icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "density": "2.0"
+    },
+    {
+      "src": "images/android-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": "3.0"
+    },
+    {
+      "src": "images/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": "4.0"
+    }
+  ]
+}

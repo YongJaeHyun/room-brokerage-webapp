@@ -1,21 +1,22 @@
 import ContractBtn from "@/components/board/ContractBtn";
 import FavoriteBtn from "@/components/board/FavoriteBtn";
 import Image from "next/image";
-import { MdRoom, MdHome, MdFavorite } from "react-icons/md";
+import { MdRoom, MdHome } from "react-icons/md";
 
 export default function DetailPage() {
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-        <h2 className="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">
+        <h2 className="mb-6 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">
           임대글 제목
         </h2>
         <div className="flex items-center justify-center rounded-xl bg-gray-100 mb-4">
           <Image
-            width={300}
-            height={300}
+            width="0"
+            height="0"
+            sizes="100vw"
             src="/images/logo.png"
-            className="object-contain"
+            className="w-1/2 h-auto m-3"
             alt="product image"
           />
         </div>

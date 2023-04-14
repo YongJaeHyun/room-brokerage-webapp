@@ -9,7 +9,7 @@ const Item = ({ id }: Props) => {
     <div className="items-start flex-col bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
       <Link href={`/board/${id}`}>
         <img className="w-full rounded-lg" src="/images/logo.png" alt="Bonnie Avatar" />
-        <div className="p-5">
+        <div className="p-5 pt-0">
           <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             월세/보증금
           </h3>

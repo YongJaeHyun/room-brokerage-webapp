@@ -1,7 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const router = useRouter();
+  const [isLogined, setIsLogined] = useState(false);
+
+  useEffect(() => {
+    // nextjs는 client-side를 렌더하기 전에 server-side를 렌더링 함.
+    // 따라서 페이지가 로드되고 window 객체가 정의되기 전까지는 localStorage에 접근 불가능.
+    if (typeof window !== "undefined") {
+      const state = JSON.parse(localStorage.getItem("isLogined") || "false");
+      setIsLogined(state);
+    }
+  }, [router.pathname]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLogined");
+    setIsLogined(false);
+    router.push("/");
+  };
   return (
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
@@ -19,12 +38,26 @@ const Header = () => {
             </span>
           </Link>
           <div className="flex items-center lg:order-2">
-            <Link
-              href="/auth/login"
-              className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-            >
-              로그인
-            </Link>
+            {isLogined ? (
+              <>
+                <Link href="/wishlist/lessee" className="text-gray-600 text-sm mr-5">찜 목록</Link>
+                <Link href="/auth/user" className="text-gray-600 text-sm mr-5">회원 정보 수정</Link>
+                <button
+                  onClick={handleLogout}
+                  className="text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-1.5 lg:py-2 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                >
+                  로그아웃
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+              >
+                로그인
+              </Link>
+            )}
+
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
@@ -63,11 +96,11 @@ const Header = () => {
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1 "
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex flex-col mt-4 ml-28 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
                 <Link
                   href="/board"
-                  className="block py-2 pr-4 pl-3 text-gray-700 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block text-lg py-2 pr-4 pl-3 text-gray-700 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                   aria-current="page"
                 >
                   원룸 찾기
@@ -75,16 +108,16 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/wishlist/lessee"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  href="/contract"
+                  className="block text-lg py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
-                  찜한 원룸
+                  계약 신청한 원룸
                 </Link>
               </li>
               <li>
                 <Link
                   href="/board/write"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block text-lg py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   원룸 내놓기
                 </Link>
@@ -92,8 +125,8 @@ const Header = () => {
 
               <li>
                 <Link
-                  href="/board/landlord"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  href="/landlord"
+                  className="block text-lg py-2 pr-10 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   내놓은 원룸
                 </Link>

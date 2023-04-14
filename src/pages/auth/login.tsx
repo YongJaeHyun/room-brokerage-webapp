@@ -3,14 +3,18 @@ import Title from "@/components/auth/Title";
 import CheckBox from "@/components/auth/CheckBox";
 import Input from "@/components/auth/Input";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function login() {
+  const router = useRouter();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const id = data.get("id");
     const password = data.get("password");
     console.log(id, password);
+    localStorage.setItem("isLogined", "true");
+    router.push("/");
   };
 
   return (

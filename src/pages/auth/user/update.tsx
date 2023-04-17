@@ -1,12 +1,13 @@
 import Seo from "@/components/Seo";
 import Title from "@/components/auth/Title";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function userProfileUpdate() {
   const router = useRouter();
   const handleUpdateUserInfo = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("123")
+    console.log("123");
     const data = new FormData();
     const nickname = data.get("nickname");
     const address = data.get("address");
@@ -72,6 +73,14 @@ export default function userProfileUpdate() {
             >
               수정
             </button>
+            <Link href="/auth/user">
+              <button
+                type="button"
+                className="inline-flex items-center px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
+              >
+                취소
+              </button>
+            </Link>
           </div>
         </form>
       </div>

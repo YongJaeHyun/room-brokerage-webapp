@@ -126,7 +126,7 @@ export default function userProfile() {
               type="button"
               className="inline-flex items-center px-8 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
             >
-              삭제
+              회원 탈퇴
             </button>
           </div>
         </div>

@@ -41,7 +41,7 @@ const Header = () => {
             {isLogined ? (
               <>
                 <Link href="/wishlist/lessee" className="text-gray-600 text-sm mr-5">찜 목록</Link>
-                <Link href="/auth/user" className="text-gray-600 text-sm mr-5">회원 정보 수정</Link>
+                <Link href="/auth/user" className="text-gray-600 text-sm mr-5">회원 정보</Link>
                 <button
                   onClick={handleLogout}
                   className="text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-1.5 lg:py-2 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"

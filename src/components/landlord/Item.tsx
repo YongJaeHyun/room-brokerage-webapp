@@ -8,7 +8,7 @@ type Props = {
 const Item = ({ id }: Props) => {
   return (
     <div className="items-start flex-col bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
-      <Link href={`/board/landlord/${id}`}>
+      <Link href={`/landlord/${id}`}>
         <img className="w-full rounded-lg" src="/images/logo.png" alt="Bonnie Avatar" />
         <div className="p-5 pt-0">
           <div className="flex justify-between">

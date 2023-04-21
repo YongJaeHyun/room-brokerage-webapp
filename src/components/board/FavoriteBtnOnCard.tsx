@@ -1,11 +1,31 @@
-import { useState } from "react";
+import api from "@/api";
+import { useEffect, useState } from "react";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-const FavoriteBtnOnCard = () => {
+type Props = {
+  id: string;
+};
+
+const FavoriteBtnOnCard = ({ id }: Props) => {
   const [value, setValue] = useState(false);
-  const handleChange = () => {
-    setValue((prev) => !prev);
+
+  const handleChange = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    await setValue((prev) => !prev);
+    await api.wishlist.update({ boardUuid: id, state: !value });
   };
+
+  const getFavoriteByBoardUuid = async () => {
+    const isExist: boolean = await api.wishlist.isExist(id);
+    const wishlist = isExist
+      ? await api.wishlist.getFavoriteByBoardUuid(id)
+      : await api.wishlist.create({ boardUuid: id, state: value });
+    setValue(wishlist?.state || false);
+  };
+
+  useEffect(() => {
+    getFavoriteByBoardUuid();
+  }, []);
   return (
     <button
       type="button"

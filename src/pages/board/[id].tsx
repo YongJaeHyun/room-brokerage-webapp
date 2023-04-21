@@ -1,14 +1,45 @@
+import api from "@/api";
 import ContractBtn from "@/components/board/ContractBtn";
 import FavoriteBtn from "@/components/board/FavoriteBtn";
 import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 import { MdRoom, MdHome } from "react-icons/md";
+import { GetServerSideProps } from "next";
 
-export default function DetailPage() {
+type Board = {
+  boardUuid: string;
+  memberId: string;
+  price: string;
+  deposit: string;
+  title: string;
+  space: string;
+  location: string;
+  text: string;
+  contracted: string;
+};
+
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+export default function DetailPage({ params: { id } }: Props) {
+  const [board, setBoard] = useState<Board | null>(null);
+
+  const getBoardByBoardUuid = useCallback(async () => {
+    const newBoards = await api.board.getBoardByBoardUuid(id);
+    setBoard(newBoards);
+  }, [id]);
+
+  useEffect(() => {
+    getBoardByBoardUuid();
+  }, []);
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
         <h2 className="mb-6 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">
-          임대글 제목
+          {board?.title}
         </h2>
         <div className="flex items-center justify-center rounded-xl bg-gray-100 mb-4">
           <Image
@@ -21,24 +52,22 @@ export default function DetailPage() {
           />
         </div>
         <p className="mb-8 text-xl font-extrabold leading-none text-gray-900 md:text-2xl dark:text-white">
-          원룸 월세/보증금 (원)
+          {`월세 ${board?.price}/${board?.deposit}`}
         </p>
         <dl className="flex items-center space-x-6 mb-6 bg-gray-200 px-5 py-5 rounded-lg">
           <div>
             <dt className="flex items-center mb-2 font-semibold leading-none text-gray-900 dark:text-white">
               <MdHome fontSize={22} className="mr-1 text-red-400" />
-              평(1평당 3.3m<sup>2</sup>)
+              평(1평 당 3.3m<sup>2</sup>)
             </dt>
-            <dd className="font-light text-black dark:text-gray-400">8평</dd>
+            <dd className="font-light text-black dark:text-gray-400">{board?.space}</dd>
           </div>
           <div>
             <dt className="flex items-center mb-2 font-semibold leading-none text-gray-900 dark:text-white">
               <MdRoom fontSize={22} className="mr-1 text-yellow-500" />
               위치
             </dt>
-            <dd className="font-light text-black dark:text-gray-400">
-              경상북도 구미시 옥계동 123-12
-            </dd>
+            <dd className="font-light text-black dark:text-gray-400">{board?.location}</dd>
           </div>
         </dl>
         <dl>
@@ -46,17 +75,22 @@ export default function DetailPage() {
             상세 설명
           </dt>
           <dd className="mb-4 font-normal text-gray-500 sm:mb-5 dark:text-gray-400 break-words">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt accusantium
-            exercitationem quisquam neque reiciendis debitis praesentium repudiandae
-            dignissimos assumenda fuga! Consequuntur exercitationem perspiciatis delectus a
-            molestias rerum facilis earum dolores.
+            {board?.text}
           </dd>
         </dl>
         <div className="flex w-screen h-20 items-center border-t-2 justify-around fixed left-0 bottom-0 bg-white dark:bg-gray-900">
-          <FavoriteBtn />
-          <ContractBtn />
+          <FavoriteBtn id={id} />
+          <ContractBtn board={board}/>
         </div>
       </div>
     </section>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      params: context.params,
+    },
+  };
+};

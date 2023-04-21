@@ -1,24 +1,37 @@
 import Link from "next/link";
 import { MdDelete, MdEditSquare } from "react-icons/md";
 
+type Board = {
+  boardUuid: string;
+  price: string;
+  deposit: string;
+  title: string;
+  space: string;
+};
+
 type Props = {
+  board: Board;
   id: string;
 };
 
-const Item = ({ id }: Props) => {
+const Item = ({ id, board }: Props) => {
   return (
-    <div className="items-start flex-col bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
+    <div className="items-start flex-col bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-700 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800">
       <Link href={`/landlord/${id}`}>
         <img className="w-full rounded-lg" src="/images/logo.png" alt="Bonnie Avatar" />
-        <div className="p-5 pt-0">
+        <div className="p-5 pt-0 w-full">
           <div className="flex justify-between">
             <h3 className="flex items-center text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              월세/보증금
+              {`월세 ${board?.price}/${board?.deposit}`}
             </h3>
-            <span className="flex justify-center items-center w-12 h-12 leading-12 rounded-full bg-white text-amber-600">8</span>
+            <span className="flex justify-center items-center w-12 h-12 leading-12 rounded-full bg-white text-amber-600">
+              0
+            </span>
           </div>
-          <span className="text-gray-500 dark:text-gray-400">평수</span>
-          <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">제목</p>
+          <span className="text-gray-500 dark:text-gray-400">{`${board.space} 평`}</span>
+          <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
+            {board.title}
+          </p>
           <ul className="flex space-x-5 justify-center sm:mt-0">
             <li>
               <button

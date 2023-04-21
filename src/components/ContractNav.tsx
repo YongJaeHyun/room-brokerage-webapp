@@ -9,7 +9,7 @@ const ContractNav = ({ completed, isLandlord }: Props) => {
   return (
     <>
       {completed ? (
-        <div className="flex justify-evenly items-center rounded-xl w-full h-16 bg-gray-100 m-auto mb-10">
+        <div className="flex justify-evenly items-center rounded-xl w-full h-16 bg-gray-100 m-auto mb-10 dark:bg-gray-700 dark:text-gray-300">
           <div>
             <Link
               href={isLandlord ? "/landlord" : "/contract"}
@@ -28,7 +28,7 @@ const ContractNav = ({ completed, isLandlord }: Props) => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-evenly items-center rounded-xl w-full h-16 bg-gray-100 m-auto mb-10">
+        <div className="flex justify-evenly items-center rounded-xl w-full h-16 bg-gray-100 m-auto mb-10 dark:bg-gray-700 dark:text-gray-300">
           <div>
             <Link
               href={isLandlord ? "/landlord" : "/contract"}

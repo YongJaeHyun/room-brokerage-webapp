@@ -3,18 +3,16 @@ import Title from "@/components/auth/Title";
 import CheckBox from "@/components/auth/CheckBox";
 import Input from "@/components/auth/Input";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import api from "@/api";
 
 export default function login() {
-  const router = useRouter();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const id = data.get("id");
-    const password = data.get("password");
-    console.log(id, password);
-    localStorage.setItem("isLogined", "true");
-    router.push("/");
+    const memberId = data.get("id");
+    const pw = data.get("pw");
+    console.log(memberId, pw);
+    api.member.login({memberId, pw})
   };
 
   return (
@@ -27,7 +25,8 @@ export default function login() {
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <Input name="id" labelName="아이디" placeholder="아이디를 입력해주세요" />
               <Input
-                name="password"
+                name="pw"
+                type="password"
                 labelName="비밀번호"
                 placeholder="비밀번호를 입력해주세요"
               />

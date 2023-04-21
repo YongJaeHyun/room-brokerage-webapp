@@ -1,30 +1,34 @@
+import api from "@/api";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { MdMenu } from "react-icons/md";
 
 const Header = () => {
   const router = useRouter();
   const [isLogined, setIsLogined] = useState(false);
 
+  const handleLogout = () => {
+    api.member.logout();
+  };
+
+  const handleIsNotLogined = () => {
+    alert("로그인이 필요한 서비스입니다.");
+  };
+
   useEffect(() => {
     // nextjs는 client-side를 렌더하기 전에 server-side를 렌더링 함.
     // 따라서 페이지가 로드되고 window 객체가 정의되기 전까지는 localStorage에 접근 불가능.
     if (typeof window !== "undefined") {
-      const state = JSON.parse(localStorage.getItem("isLogined") || "false");
-      setIsLogined(state);
+      const isToken = localStorage.getItem("ACCESS_TOKEN") ? true : false;
+      setIsLogined(isToken);
     }
   }, [router.pathname]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("isLogined");
-    setIsLogined(false);
-    router.push("/");
-  };
   return (
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl lg:relative">
           <Link href="/" className="flex items-center">
             <Image
               width={35}
@@ -40,8 +44,12 @@ const Header = () => {
           <div className="flex items-center lg:order-2">
             {isLogined ? (
               <>
-                <Link href="/wishlist/lessee" className="text-gray-600 text-sm mr-5">찜 목록</Link>
-                <Link href="/auth/user" className="text-gray-600 text-sm mr-5">회원 정보</Link>
+                <Link href="/wishlist/lessee" className="text-gray-600 text-sm mr-5 dark:text-gray-300">
+                  찜 목록
+                </Link>
+                <Link href="/auth/user" className="text-gray-600 text-sm mr-5 dark:text-gray-300">
+                  회원 정보
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-1.5 lg:py-2 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
@@ -66,41 +74,18 @@ const Header = () => {
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-              <svg
-                className="hidden w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              <MdMenu fontSize={26} />
             </button>
           </div>
           <div
-            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1 "
+            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1 lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2"
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col mt-4 ml-28 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex flex-col mt-4 m-auto font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
                 <Link
                   href="/board"
-                  className="block text-lg py-2 pr-4 pl-3 text-gray-700 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block text-lg py-2 pr-4 pl-3 text-gray-700 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                   aria-current="page"
                 >
                   원룸 찾기
@@ -108,16 +93,18 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/contract"
-                  className="block text-lg py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  href={isLogined ? "/contract" : "/auth/login"}
+                  onClick={isLogined ? () => {} : handleIsNotLogined}
+                  className="block text-lg py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   계약 신청한 원룸
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/board/write"
-                  className="block text-lg py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  href={isLogined ? "/board/write" : "/auth/login"}
+                  onClick={isLogined ? () => {} : handleIsNotLogined}
+                  className="block text-lg py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   원룸 내놓기
                 </Link>
@@ -125,8 +112,9 @@ const Header = () => {
 
               <li>
                 <Link
-                  href="/landlord"
-                  className="block text-lg py-2 pr-10 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  href={isLogined ? "/landlord" : "/auth/login"}
+                  onClick={isLogined ? () => {} : handleIsNotLogined}
+                  className="block text-lg py-2 pl-3 text-gray-700 border-b border-gray-100 hover:text-white hover:bg-primary-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   내놓은 원룸
                 </Link>

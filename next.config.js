@@ -3,7 +3,7 @@ const withPlugins = require("next-compose-plugins");
 const withPWA = require("next-pwa");
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
 };
 
 module.exports = withPlugins(
